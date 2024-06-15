@@ -1,6 +1,6 @@
 // import { arbitrumGoerli } from 'wagmi/dist/chains';
 import { arbitrumGoerli } from "wagmi/chains";
-import { mantaTest } from "./chains";
+import { mantaTest,bnbTest } from "./chains";
 
 export const config = {
   [arbitrumGoerli.id]: {
@@ -11,6 +11,11 @@ export const config = {
   [mantaTest.id]: {
     SHUFFLE: "0x8F8a52Ee35A15F29c789b7a635aA78bC10628B87",
     HILO: "",
+    KS: "0x308d4d5d797D5120A2a6B89899abDCe475A8c33D",
+  },
+  [bnbTest.id]: {
+    SHUFFLE: "0x4fb570e05124609c20EF617870f752A88978C7dc",
+    HILO: "0xD1276758Db1576F084D6c6Ffc328552b952FE951",
     KS: "0x308d4d5d797D5120A2a6B89899abDCe475A8c33D",
   },
 };

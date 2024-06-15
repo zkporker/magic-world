@@ -11,7 +11,7 @@ import { mockUser1, mockUser2 } from "../config/asset";
 
 import styles from "../styles/Home.module.css";
 import { ethers } from "ethers";
-import { mantaTest } from "../config/chains";
+import { bnbTest } from "../config/chains";
 
 export default function Home() {
   const { connect, connectors } = useConnect();
@@ -26,7 +26,7 @@ export default function Home() {
 
   const { zkShuffle, isLoaded } = useContext(ZKShuffleContext);
   const { switchNetwork } = useSwitchNetwork({
-    chainId: mantaTest.id,
+    chainId: bnbTest.id,
   });
 
   const {
@@ -82,11 +82,11 @@ export default function Home() {
     );
   }
 
-  if (chain?.id !== mantaTest.id) {
+  if (chain?.id !== bnbTest.id) {
     return (
       <div className=" flex flex-col gap-10  h-screen items-center justify-center  text-2xl font-medium bg-slate-900 ">
         <div className="text-2xl font-medium">
-          Only support Manta test network now
+          Only support bnb test network now
         </div>
         <div
           onClick={() => {
@@ -98,7 +98,7 @@ export default function Home() {
           }}
           className="px-6 py-2 text-base font-medium rounded-lg bg-slate-100 text-slate-900  text-center cursor-pointer dark:bg-slate-600 dark:text-slate-400 dark:highlight-white/10 hover:opacity-70"
         >
-          Switch to Manta test
+          Switch to bnb test
         </div>
       </div>
     );
@@ -121,7 +121,6 @@ export default function Home() {
       </div>
     );
   }
-
   if (creator !== address && joiner !== address) {
     return (
       <div className=" flex flex-col gap-10  h-screen items-center justify-center  text-2xl font-medium bg-slate-900 ">

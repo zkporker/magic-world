@@ -5,10 +5,10 @@ import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { mantaTest } from "../config/chains";
+import { bnbTest } from "../config/chains";
 // import { arbitrumGoerli } from '../config/chains';
 
-export const chainsParams = [mantaTest];
+export const chainsParams = [bnbTest];
 
 const { chains, provider } = configureChains(chainsParams, [
   // jsonRpcProvider({
