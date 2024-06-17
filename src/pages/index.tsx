@@ -1,5 +1,5 @@
 import { useAccount, useConnect, useNetwork, useSwitchNetwork } from "wagmi";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { arbitrumGoerli } from "wagmi/chains";
 
@@ -25,6 +25,15 @@ export default function Home() {
   const { address } = useAccount();
 
   const { zkShuffle, isLoaded } = useContext(ZKShuffleContext);
+  
+  const [isRouterReady, setIsRouterReady] = useState(false);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setIsRouterReady(true);
+    }
+  }, [router.isReady]);
+
   const { switchNetwork } = useSwitchNetwork({
     chainId: bnbTest.id,
   });
@@ -48,16 +57,26 @@ export default function Home() {
     gameInfo,
     winner,
   } = useGame(creator, joiner, address);
+
+  
   const [selectCreatorCard, setSelectCreatorCard] = useState<number>();
   const [selectJoinerCard, setSelectJoinerCard] = useState<number>();
 
-  if (!router.isReady) {
+  if (!isRouterReady) {
     return (
       <div className=" flex flex-col gap-10  h-screen items-center justify-center  text-2xl font-medium bg-slate-900 ">
         <div className="text-2xl font-medium">Loading resource...</div>
       </div>
     );
   }
+
+  // if (!router.isReady) {
+  //   return (
+  //     <div className=" flex flex-col gap-10  h-screen items-center justify-center  text-2xl font-medium bg-slate-900 ">
+  //       <div className="text-2xl font-medium">Loading resource...</div>
+  //     </div>
+  //   );
+  // }
 
   const isCreator = address === creator;
   const openShuffleId = isCreator ? creatorShuffleId : joinerShuffleId;
@@ -67,7 +86,7 @@ export default function Home() {
   if (!address) {
     return (
       <div className=" flex flex-col gap-10  h-screen items-center justify-center  text-2xl font-medium bg-slate-900 ">
-        <div className="text-2xl font-medium">please connect wallet first</div>
+        <div className="text-2xl font-medium text-white">please connect wallet first</div>
         <div
           onClick={() => {
             connect({
