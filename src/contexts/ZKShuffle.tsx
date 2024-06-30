@@ -92,7 +92,7 @@ export function ZKShuffleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!signer) return;
-    getCacheData(5);
+    getCacheData(52);
 
     return () => {};
   }, [signer]);

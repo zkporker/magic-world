@@ -8,6 +8,7 @@ import { ZKShuffleContext } from '../contexts/ZKShuffle';
 export const useWrites = () => {
   const { hs } = useContracts();
   const { zkShuffle } = useContext(ZKShuffleContext);
+  // create game
   const createGameStatus = useWriteContract(hs?.createShuffleForCreator, {});
   const joinGameStatus = useWriteContract(hs?.createShuffleForJoiner, {});
   const chooseCardStatus = useWriteContract(hs?.chooseCard, {});
