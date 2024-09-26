@@ -1,10 +1,11 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 import { ZKShuffle, dnld_crypto_files } from "@zk-shuffle/jssdk";
-import { useSigner } from "wagmi";
+// import { useSigner } from "wagmi";
+import { useCurrentAccount } from '@mysten/dapp-kit';
 import { set, get, clear } from "idb-keyval";
 
-import { useContracts } from "../hooks/useContracts";
+// import { useContracts } from "../hooks/useContracts";
 
 export type UnwrapPromise<T> = T extends Promise<infer U> ? U : never;
 
@@ -18,8 +19,9 @@ export interface IZKShuffleContext {
 export const ZKShuffleContext = createContext<IZKShuffleContext>(null);
 
 export function ZKShuffleProvider({ children }: { children: ReactNode }) {
-  const { curChainConfig } = useContracts();
-  const { data: signer } = useSigner();
+  // const { curChainConfig } = useContracts();
+  // const { data: signer } = useSigner();
+  const signer = useCurrentAccount()?.address;
 
   const [zkShuffle, setZkShuffle] = useState<ZKShuffle>();
 
@@ -75,7 +77,7 @@ export function ZKShuffleProvider({ children }: { children: ReactNode }) {
       let seed = await get("sk");
       seed = seed || (await ZKShuffle.generateShuffleSecret());
       const zkShuffle = await ZKShuffle.create(
-        curChainConfig.SHUFFLE,
+        "shuffleManagerContractAddress",
         signer,
         seed,
         shuffleParams.decrypt_wasm,

@@ -29,7 +29,7 @@ function useEvent({
   addressIndex,
   others: { creator, joiner, gameId },
 }: UseEventProps) {
-  const provider = useProvider();
+  // const provider = useProvider();
 
   const [creatorValue, setCreatorValue] = useState<any>();
   const [joinerValue, setJoinerValue] = useState<any>();
@@ -55,19 +55,19 @@ function useEvent({
     let interval: string | number | NodeJS.Timer | null | undefined = null;
     if (!contract) return;
     if (!isStop) {
-      interval = setInterval(async () => {
-        const logs = await provider.getLogs(
-          getLogParams({
-            filter: filter as EventFilter,
-            address: contract?.address,
-            provider: provider,
-          })
-        );
-        logs.forEach((log: any) => {
-          const event = contract.interface.parseLog(log);
-          listener(...event.args);
-        });
-      }, PULL_DATA_TIME);
+      // interval = setInterval(async () => {
+      //   const logs = await provider.getLogs(
+      //     getLogParams({
+      //       filter: filter as EventFilter,
+      //       address: contract?.address,
+      //       provider: provider,
+      //     })
+      //   );
+      //   logs.forEach((log: any) => {
+      //     const event = contract.interface.parseLog(log);
+      //     listener(...event.args);
+      //   });
+      // }, PULL_DATA_TIME);
     } else {
       interval && clearInterval(interval);
     }
@@ -75,7 +75,7 @@ function useEvent({
     return () => {
       interval && clearInterval(interval);
     };
-  }, [addressIndex, contract, creator, filter, isStop, joiner, provider]);
+  }, [addressIndex, contract, creator, filter, isStop, joiner]);
 
   return {
     creator: creatorValue,

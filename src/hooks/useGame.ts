@@ -32,7 +32,7 @@ export const BLOCK_INTERVAL = 10;
 
 function useGame(creator: string, joiner: string, address: string) {
   const { hs } = useContracts();
-  const provider = useProvider();
+  // const provider = useProvider();
   const [gameStatus, setGameStatus] = useState<IGameStatus>(
     IGameStatus.WAIT_START
   );
@@ -307,7 +307,8 @@ function useGame(creator: string, joiner: string, address: string) {
   useEffect(() => {
     if (creatorShuffleId) {
       setInterval(async () => {
-        const startBlock = (await provider.getBlockNumber()) - BLOCK_INTERVAL;
+        // const startBlock = (await provider.getBlockNumber()) - BLOCK_INTERVAL;
+        const startBlock = 0;
         const res = await zkShuffle.checkTurn(creatorShuffleId, startBlock);
         if (res !== GameTurn.NOP) {
           setCreatorShuffleStatus(res);
@@ -319,7 +320,8 @@ function useGame(creator: string, joiner: string, address: string) {
   useEffect(() => {
     if (joinerShuffleId) {
       setInterval(async () => {
-        const startBlock = (await provider.getBlockNumber()) - BLOCK_INTERVAL;
+        // const startBlock = (await provider.getBlockNumber()) - BLOCK_INTERVAL;
+        const startBlock = 0;
         const res = await zkShuffle.checkTurn(joinerShuffleId, startBlock);
         if (res !== GameTurn.NOP) {
           setJoinerShuffleStatus(res);

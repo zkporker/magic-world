@@ -1,7 +1,7 @@
 // import { arbitrumGoerli } from 'wagmi/dist/chains';
 import { arbitrumGoerli } from "wagmi/chains";
 import { mantaTest,bnbTest } from "./chains";
-
+// 作废
 export const config = {
   [arbitrumGoerli.id]: {
     SHUFFLE: "0xc7DBe0744c1ADB37Fd74904639AD9d20294f449a",
